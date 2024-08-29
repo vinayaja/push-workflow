@@ -1,23 +1,14 @@
 import { getInput, setFailed } from "@actions/core";
-import { context, getOctokit } from "@actions/github";  
+import { context, getOctokit } from "@actions/github"; 
 
-// Octokit.js
-// https://github.com/octokit/core.js#readme
-
-async function run() {
+export async function run() {
     const token = getInput("gh-token");
     const runid = getInput("run-id");
     let payload = getInput("payload");
 
     const octoKit = getOctokit(token);
 
-    console.log(runid);
-    console.log(context.repo.owner);
-    console.log(context.repo.repo);
-    console.log(context.ref.replace("refs/heads/",""));
-    console.log(JSON.parse(payload));
-
-    try{
+    try{        
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,
             repo: context.repo.repo,

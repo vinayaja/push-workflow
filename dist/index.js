@@ -31095,20 +31095,14 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.run = run;
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
-// Octokit.js
-// https://github.com/octokit/core.js#readme
 async function run() {
     const token = (0, core_1.getInput)("gh-token");
     const runid = (0, core_1.getInput)("run-id");
     let payload = (0, core_1.getInput)("payload");
     const octoKit = (0, github_1.getOctokit)(token);
-    console.log(runid);
-    console.log(github_1.context.repo.owner);
-    console.log(github_1.context.repo.repo);
-    console.log(github_1.context.ref.replace("refs/heads/", ""));
-    console.log(JSON.parse(payload));
     try {
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: github_1.context.repo.owner,
