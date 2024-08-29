@@ -21,7 +21,7 @@ jobs:
         node-version: '20'
 
     - name: 'Run workflow'
-      uses: vinayaja/push-workflow@v1
+      uses: vinayaja/push-workflow@v1.0.0
       with:
         gh-token: ${{ github.token }}
         run-id: "114803271"
