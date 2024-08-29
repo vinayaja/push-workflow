@@ -6,7 +6,7 @@ inputs:
   gh-token:
     description: "Github Token"
     required: true
-  runid:
+  run-id:
     description: "Run id of workflow"
     required: true
   payload:

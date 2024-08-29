@@ -31107,14 +31107,15 @@ async function run() {
     console.log(runid);
     console.log(github_1.context.repo.owner);
     console.log(github_1.context.repo.repo);
-    console.log(github_1.context.ref);
+    console.log(github_1.context.ref.replace("refs/heads/", ""));
+    console.log(JSON.parse(payload));
     try {
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: github_1.context.repo.owner,
             repo: github_1.context.repo.repo,
             workflow_id: runid,
-            ref: github_1.context.ref,
-            inputs: {},
+            ref: github_1.context.ref.replace("refs/heads/", ""),
+            inputs: JSON.parse(payload),
             headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
             }

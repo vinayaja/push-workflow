@@ -13,5 +13,5 @@ jobs:
     - uses: ./
       with:
         gh-token: ${{ github.token }}
-        runid: "114803271"
+        run-id: "114803271"
         payload: "{}"

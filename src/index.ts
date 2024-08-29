@@ -14,15 +14,16 @@ async function run() {
     console.log(runid);
     console.log(context.repo.owner);
     console.log(context.repo.repo);
-    console.log(context.ref);
+    console.log(context.ref.replace("refs/heads/",""));
+    console.log(JSON.parse(payload));
 
     try{
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,
             repo: context.repo.repo,
             workflow_id: runid,
-            ref: context.ref,
-            inputs: {},
+            ref: context.ref.replace("refs/heads/",""),
+            inputs: JSON.parse(payload),
             headers: {
               'X-GitHub-Api-Version': '2022-11-28'
             }
