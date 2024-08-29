@@ -31120,7 +31120,9 @@ async function run() {
         (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
-run();
+if (!process.env.JEST_WORKER_ID) {
+    run();
+}
 
 })();
 
