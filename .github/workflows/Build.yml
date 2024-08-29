@@ -10,8 +10,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - uses: ./
+    - name: 'Run workflow'
+      uses: vinayaja/push-workflow@v1
       with:
         gh-token: ${{ github.token }}
         run-id: "114803271"
-        payload: '{"logLevel":"test","tags":"1"}'
+        payload: '{"env": "<env>"}'
