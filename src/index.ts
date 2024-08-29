@@ -11,6 +11,11 @@ async function run() {
 
     const octoKit = getOctokit(token);
 
+    console.log(runid);
+    console.log(context.repo.owner);
+    console.log(context.repo.repo);
+    console.log(context.ref);
+
     try{
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,

@@ -31104,6 +31104,10 @@ async function run() {
     const runid = (0, core_1.getInput)("run-id");
     let payload = (0, core_1.getInput)("payload");
     const octoKit = (0, github_1.getOctokit)(token);
+    console.log(runid);
+    console.log(github_1.context.repo.owner);
+    console.log(github_1.context.repo.repo);
+    console.log(github_1.context.ref);
     try {
         const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: github_1.context.repo.owner,
