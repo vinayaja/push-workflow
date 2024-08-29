@@ -31110,7 +31110,7 @@ async function run() {
             repo: github_1.context.repo.repo,
             workflow_id: runid,
             ref: github_1.context.ref,
-            inputs: JSON.parse(payload),
+            inputs: {},
             headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
             }

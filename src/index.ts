@@ -17,7 +17,7 @@ async function run() {
             repo: context.repo.repo,
             workflow_id: runid,
             ref: context.ref,
-            inputs: JSON.parse(payload),
+            inputs: {},
             headers: {
               'X-GitHub-Api-Version': '2022-11-28'
             }
