@@ -7,15 +7,21 @@ async function run() {
     let payload = getInput("payload");
 
     const octoKit = getOctokit(token);
-
-    await octoKit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        workflow_id: runid,
-        ref: context.ref,
-        inputs: JSON.parse(payload),
-        headers: {
-          'X-GitHub-Api-Version': '2022-11-28'
-        }
-    })
+    try{
+        await octoKit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: runid,
+            ref: context.ref,
+            inputs: JSON.parse(payload),
+            headers: {
+              'X-GitHub-Api-Version': '2022-11-28'
+            }
+        })
+    }   catch(error){
+        setFailed((error as Error)?.message ?? "Unknown error");
+    }
+    
 }
+
+run();
