@@ -14,4 +14,4 @@ jobs:
       with:
         gh-token: ${{ github.token }}
         runid: "114803271"
-        payload: ""
+        payload: "{}"
