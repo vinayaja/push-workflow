@@ -2,6 +2,17 @@ name: "Push workflow"
 description: "Push workflow in remote or local repository"
 author: "Vinayak Jadhav"
 
+inputs:
+  gh-token:
+    description: "Github Token"
+    required: true
+  runid:
+    description: "Run id of workflow"
+    required: true
+  payload:
+    description: "Json payload"
+    required: false
+
 runs:
   using: "node16"
   main: "dist/index.js"
