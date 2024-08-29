@@ -31097,13 +31097,15 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
+// Octokit.js
+// https://github.com/octokit/core.js#readme
 async function run() {
     const token = (0, core_1.getInput)("gh-token");
     const runid = (0, core_1.getInput)("run-id");
     let payload = (0, core_1.getInput)("payload");
     const octoKit = (0, github_1.getOctokit)(token);
     try {
-        await octoKit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+        const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: github_1.context.repo.owner,
             repo: github_1.context.repo.repo,
             workflow_id: runid,
@@ -31113,6 +31115,7 @@ async function run() {
                 'X-GitHub-Api-Version': '2022-11-28'
             }
         });
+        console.log(result);
     }
     catch (error) {
         (0, core_1.setFailed)(error?.message ?? "Unknown error");

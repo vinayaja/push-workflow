@@ -1,14 +1,18 @@
 import { getInput, setFailed } from "@actions/core";
 import { context, getOctokit } from "@actions/github";  
 
+// Octokit.js
+// https://github.com/octokit/core.js#readme
+
 async function run() {
     const token = getInput("gh-token");
     const runid = getInput("run-id");
     let payload = getInput("payload");
 
     const octoKit = getOctokit(token);
+
     try{
-        await octoKit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+        const result = await octoKit.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,
             repo: context.repo.repo,
             workflow_id: runid,
@@ -18,6 +22,9 @@ async function run() {
               'X-GitHub-Api-Version': '2022-11-28'
             }
         })
+
+        console.log(result);
+
     }   catch(error){
         setFailed((error as Error)?.message ?? "Unknown error");
     }
