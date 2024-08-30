@@ -31101,20 +31101,37 @@ const github_1 = __nccwpck_require__(5438);
 async function run() {
     const token = (0, core_1.getInput)("gh-token");
     const runid = (0, core_1.getInput)("run-id");
+    const remoterepo = (0, core_1.getInput)("remote-repo");
+    const remotebranch = (0, core_1.getInput)("remote-branch");
     let payload = (0, core_1.getInput)("payload");
     const octoKit = (0, github_1.getOctokit)(token);
     try {
-        const result = await octoKit.rest.actions.createWorkflowDispatch({
-            owner: github_1.context.repo.owner,
-            repo: github_1.context.repo.repo,
-            workflow_id: runid,
-            ref: github_1.context.ref.replace("refs/heads/", ""),
-            inputs: JSON.parse(payload),
-            headers: {
-                'X-GitHub-Api-Version': '2022-11-28'
-            }
-        });
-        console.log(result);
+        if ((remoterepo == "") && (remotebranch == "")) {
+            const result = await octoKit.rest.actions.createWorkflowDispatch({
+                owner: github_1.context.repo.owner,
+                repo: github_1.context.repo.repo,
+                workflow_id: runid,
+                ref: github_1.context.ref.replace("refs/heads/", ""),
+                inputs: JSON.parse(payload),
+                headers: {
+                    'X-GitHub-Api-Version': '2022-11-28'
+                }
+            });
+            console.log(result);
+        }
+        if ((remoterepo != "") && (remotebranch != "")) {
+            const result = await octoKit.rest.actions.createWorkflowDispatch({
+                owner: remoterepo.split("/")[0],
+                repo: remoterepo.split("/")[1],
+                workflow_id: runid,
+                ref: remotebranch,
+                inputs: JSON.parse(payload),
+                headers: {
+                    'X-GitHub-Api-Version': '2022-11-28'
+                }
+            });
+            console.log(result);
+        }
     }
     catch (error) {
         (0, core_1.setFailed)(error?.message ?? "Unknown error");

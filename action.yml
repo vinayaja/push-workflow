@@ -4,13 +4,19 @@ author: "Vinayak Jadhav"
 
 inputs:
   gh-token:
-    description: "Github Token"
+    description: "Github Token or Pat Token"
     required: true
   run-id:
     description: "Run id of workflow"
     required: true
   payload:
     description: "Json payload"
+    required: true
+  remote-repo:
+    description: "Remote repository"
+    required: false
+  remote-branch:
+    description: "Remote repository branch"
     required: false
 
 runs:
