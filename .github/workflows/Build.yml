@@ -15,6 +15,6 @@ jobs:
       with:
         gh-token: ${{ secrets.PAT_TOKEN }}
         run-id: "114772299"
-        payload: '{}'
+        payload: ''
         remote-branch: ''
         remote-repo: 'vinayaja/replace-tokens'
