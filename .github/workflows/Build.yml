@@ -14,5 +14,7 @@ jobs:
       uses: vinayaja/push-workflow@feature/remote-push
       with:
         gh-token: ${{ github.token }}
-        run-id: "114803271"
-        payload: '{"logLevel":"test","tags":"1"}'
+        run-id: "114772299"
+        payload: '{}'
+        remote-branch: 'main'
+        remote-repo: 'vinayaja/replace-tokens'
