@@ -13,7 +13,7 @@ jobs:
     - name: 'Run workflow'
       uses: vinayaja/push-workflow@feature/remote-push
       with:
-        gh-token: ${{ github.token }}
+        gh-token: ${{ secrets.PAT_TOKEN }}
         run-id: "114772299"
         payload: '{}'
         remote-branch: 'main'
