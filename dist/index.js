@@ -31119,7 +31119,7 @@ async function run() {
             });
             console.log(result);
         }
-        if ((remoterepo != "") && (remotebranch != "")) {
+        else if ((remoterepo != "") && (remotebranch != "")) {
             const result = await octoKit.rest.actions.createWorkflowDispatch({
                 owner: remoterepo.split("/")[0],
                 repo: remoterepo.split("/")[1],
@@ -31131,6 +31131,9 @@ async function run() {
                 }
             });
             console.log(result);
+        }
+        else {
+            throw new Error("PLease provide valid inputs; remote-repo or remote-branch is missing");
         }
     }
     catch (error) {
