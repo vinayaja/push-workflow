@@ -3,7 +3,7 @@
   "testEnvironment": "node",
   "collectCoverage": true,
   "coverageReporters": ["lcov", "text-summary"],
-  "collectCoverageFrom": ["src/**/*ts"],
-  "coveragePathIgnorePatterns": ["/node_modules","/__tests__/"],
-  "testPathIgnorePatterns": ["/node_modules/"] 
+  "collectCoverageFrom": ["src/**/*.ts"],
+  "coveragePathIgnorePatterns": ["/node_modules/", "/__tests__/"],
+  "testPathIgnorePatterns": ["/node_modules/"]
 }

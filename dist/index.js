@@ -31099,25 +31099,46 @@ exports.run = run;
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
 async function run() {
+    var _a;
     const token = (0, core_1.getInput)("gh-token");
     const runid = (0, core_1.getInput)("run-id");
+    const remoterepo = (0, core_1.getInput)("remote-repo");
+    const remotebranch = (0, core_1.getInput)("remote-branch");
     let payload = (0, core_1.getInput)("payload");
     const octoKit = (0, github_1.getOctokit)(token);
     try {
-        const result = await octoKit.rest.actions.createWorkflowDispatch({
-            owner: github_1.context.repo.owner,
-            repo: github_1.context.repo.repo,
-            workflow_id: runid,
-            ref: github_1.context.ref.replace("refs/heads/", ""),
-            inputs: JSON.parse(payload),
-            headers: {
-                'X-GitHub-Api-Version': '2022-11-28'
-            }
-        });
-        console.log(result);
+        if ((remoterepo == "") && (remotebranch == "")) {
+            const result = await octoKit.rest.actions.createWorkflowDispatch({
+                owner: github_1.context.repo.owner,
+                repo: github_1.context.repo.repo,
+                workflow_id: runid,
+                ref: github_1.context.ref.replace("refs/heads/", ""),
+                inputs: JSON.parse(payload),
+                headers: {
+                    'X-GitHub-Api-Version': '2022-11-28'
+                }
+            });
+            console.log(result);
+        }
+        else if ((remoterepo != "") && (remotebranch != "")) {
+            const result = await octoKit.rest.actions.createWorkflowDispatch({
+                owner: remoterepo.split("/")[0],
+                repo: remoterepo.split("/")[1],
+                workflow_id: runid,
+                ref: remotebranch,
+                inputs: JSON.parse(payload),
+                headers: {
+                    'X-GitHub-Api-Version': '2022-11-28'
+                }
+            });
+            console.log(result);
+        }
+        else {
+            throw new Error("PLease provide valid inputs; remote-repo or remote-branch is missing");
+        }
     }
     catch (error) {
-        (0, core_1.setFailed)(error?.message ?? "Unknown error");
+        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
     }
 }
 if (!process.env.JEST_WORKER_ID) {
