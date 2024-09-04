@@ -26,9 +26,9 @@ jobs:
         gh-token: ${{ github.token }}
         run-id: "xxxxxxxxxx"
         payload: '{"env": "<env>"}'
+```
 
-
-### Sample workflow to push deployment or workflow run in same repo
+### Sample workflow to push deployment or workflow run in remote repo
 
 ```yaml
 # File: .github/workflows/workflow.yml
@@ -56,3 +56,5 @@ jobs:
         payload: '{}'
         remote-branch: 'branch name'
         remote-repo: 'owner/repository'
+  
+```

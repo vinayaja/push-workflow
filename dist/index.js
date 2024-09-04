@@ -31099,6 +31099,7 @@ exports.run = run;
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
 async function run() {
+    var _a;
     const token = (0, core_1.getInput)("gh-token");
     const runid = (0, core_1.getInput)("run-id");
     const remoterepo = (0, core_1.getInput)("remote-repo");
@@ -31137,7 +31138,7 @@ async function run() {
         }
     }
     catch (error) {
-        (0, core_1.setFailed)(error?.message ?? "Unknown error");
+        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
     }
 }
 if (!process.env.JEST_WORKER_ID) {
