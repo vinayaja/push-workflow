@@ -21,7 +21,7 @@ jobs:
         node-version: '20'
 
     - name: 'Run workflow'
-      uses: vinayaja/push-workflow@v1.1.0
+      uses: vinayaja/push-workflow@v1.1.1
       with:
         gh-token: ${{ github.token }}
         run-id: "xxxxxxxxxx"
@@ -49,7 +49,7 @@ jobs:
         node-version: '20'
 
     - name: 'Run workflow'
-      uses: vinayaja/push-workflow@1.1.0
+      uses: vinayaja/push-workflow@1.1.1
       with:
         gh-token: ${{ secrets.PAT_TOKEN }} # PAT token is required to access remore repo actions
         run-id: "xxxxxxxxx"
